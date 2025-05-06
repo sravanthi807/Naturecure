@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicinal Plant Information</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .plant-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .plant-card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">
+        <!-- <img src="{{ url_for('static', filename='logo.png') }}" alt="Project Logo"> -->
+         Medicinal Plant Finder
+    </a>
+</nav>
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Medicinal Plants for {{ disease | capitalize }}</h1>
+    <p class="text-center text-muted mb-5">
+        Below are the recommended medicinal plants for <strong>{{ disease | capitalize }}</strong>. Click "Search Again" to look up another disease.
+    </p>
+
+    <!-- Display Plant Cards -->
+    <div class="row">
+        {% for name, image in plants %}
+            <div class="col-md-4">
+                <div class="card plant-card shadow-sm">
+                    <img src="{{ url_for('static', filename=image) }}" class="card-img-top" alt="Image of {{ name }}">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ name }}</h5>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Search Again</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer bg-primary text-white text-center py-3 mt-5">
+    &copy; 2024 Medicinal Plant Finder | Bringing natural remedies closer to you.
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
